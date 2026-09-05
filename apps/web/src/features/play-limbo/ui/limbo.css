@@ -1,0 +1,55 @@
+.limbo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--kb-space-2);
+  color: var(--kb-text-hi);
+  transition: color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.limbo--win {
+  color: var(--kb-mint-500);
+}
+
+.limbo--loss {
+  color: var(--kb-rose-500);
+}
+
+.limbo__value {
+  font-family: var(--kb-font-mono);
+  font-weight: 700;
+  /* tabular-nums обязателен: иначе цифры дёргаются по ширине при прокрутке. */
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(40px, 9vw, 88px);
+  line-height: 1;
+}
+
+.limbo__suffix {
+  font-size: 20px;
+  color: var(--kb-text-low);
+}
+
+.limbo-history {
+  display: flex;
+  gap: var(--kb-space-1);
+  overflow: hidden;
+  justify-content: flex-end;
+}
+
+.limbo-history__chip {
+  padding: 2px var(--kb-space-2);
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ink-700);
+  font-size: 12px;
+  color: var(--kb-text-mid);
+  white-space: nowrap;
+}
+
+.limbo-history__chip.is-win {
+  background: var(--kb-mint-tint);
+  color: var(--kb-mint-500);
+}
+
+.limbo-history__chip.is-loss {
+  background: var(--kb-rose-tint);
+  color: var(--kb-rose-500);
+}

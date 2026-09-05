@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+
+    // Nest строится на декораторах и runtime-метаданных: без emitDecoratorMetadata
+    // конструкторная инъекция не работает вовсе.
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    // ES2022-семантика полей ломает инъекцию в объявленные поля. Оставляем старую.
+    "useDefineForClassFields": false,
+    "strictPropertyInitialization": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

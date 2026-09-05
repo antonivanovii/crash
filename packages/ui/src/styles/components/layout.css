@@ -1,0 +1,126 @@
+/* ── Заголовок секции ───────────────────────────────────────────────────── */
+.kb-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--kb-space-3);
+  margin-bottom: 14px;
+}
+
+.kb-section-header__title {
+  font-family: var(--kb-font-ui);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--kb-text-hi);
+}
+
+.kb-section-header__subtitle {
+  font-size: 13px;
+  color: var(--kb-text-low);
+}
+
+.kb-section-header__action {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kb-ember-400);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .kb-section-header__title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  /* На 390px описание секции не помещается рядом с заголовком и действием. */
+  .kb-section-header__subtitle {
+    display: none;
+  }
+
+  .kb-section-header__action {
+    font-size: 12.5px;
+  }
+}
+
+/* ── Строка «ключ — значение» ───────────────────────────────────────────── */
+.kb-stat-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--kb-space-3);
+  font-size: 12.5px;
+  color: var(--kb-text-mid);
+}
+
+.kb-stat-row__label {
+  min-width: 0;
+}
+
+.kb-stat-row__value {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--kb-text-hi);
+  white-space: nowrap;
+}
+
+.kb-stat-row__value--win {
+  color: var(--kb-mint-500);
+}
+
+.kb-stat-row__value--loss {
+  color: var(--kb-rose-500);
+}
+
+.kb-stat-row__value--escrow {
+  color: var(--kb-amber-500);
+}
+
+.kb-stat-row__value--muted {
+  color: var(--kb-text-low);
+}
+
+/* Итог блока: возможная выплата, «если ДА». */
+.kb-stat-row--emphasis .kb-stat-row__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.kb-stat-row--emphasis .kb-stat-row__value {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* ── Живой индикатор ────────────────────────────────────────────────────── */
+.kb-pulse-dot {
+  display: inline-block;
+  border-radius: var(--kb-radius-full);
+  flex-shrink: 0;
+  animation: kb-pulse 1.4s infinite;
+}
+
+.kb-pulse-dot--live {
+  background: var(--kb-slate-500);
+}
+
+.kb-pulse-dot--win {
+  background: var(--kb-mint-500);
+}
+
+.kb-pulse-dot--loss {
+  background: var(--kb-rose-500);
+}
+
+.kb-pulse-dot--warning {
+  background: var(--kb-amber-500);
+}
+
+.kb-pulse-dot--muted {
+  background: var(--kb-text-low);
+}
+
+.kb-pulse-dot--still {
+  animation: none;
+}

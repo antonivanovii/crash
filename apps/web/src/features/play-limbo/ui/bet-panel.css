@@ -1,0 +1,22 @@
+.bet-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-space-3);
+}
+
+.bet-panel__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-space-1);
+}
+
+.bet-panel__error {
+  color: var(--kb-rose-500);
+  font: var(--kb-caption);
+}
+
+.limbo-stage {
+  display: grid;
+  gap: var(--kb-space-6);
+  justify-items: center;
+}

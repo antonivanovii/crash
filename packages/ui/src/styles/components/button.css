@@ -1,0 +1,257 @@
+/**
+ * Кнопки. Макет: UI Kit → «Кнопки», h 44 / 36 / 30 · r 8 · fw 600.
+ *
+ * Пять вариантов: primary, secondary, ghost, danger, cashout. У каждого свои
+ * default / hover / pressed / disabled; loading есть только там, где операция
+ * действительно долгая — у primary, secondary и cashout.
+ *
+ * Pressed везде даёт scale(0.985): единственная деформация в системе.
+ */
+.kb-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kb-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--kb-radius-s);
+  font-family: var(--kb-font-ui);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    border-color var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease),
+    transform var(--kb-duration-hover) var(--kb-ease);
+}
+
+/* ── Размеры ────────────────────────────────────────────────────────────── */
+
+/**
+ * Четыре размера на всё приложение. Макеты рисуют восемь высот
+ * (30/34/36/38/40/44/48/52), но разница в 2px незаметна, а восемь вариантов
+ * в коде — это восемь мест, где потом разойдётся hover. Ближайшее округление:
+ * 34/38/40 → m, 48/52 → xl.
+ */
+.kb-button--xl {
+  height: var(--kb-control-xl);
+  padding: 0 22px;
+  font-size: 15px;
+}
+
+.kb-button--l {
+  height: var(--kb-control-l);
+  padding: 0 22px;
+  font-size: 14px;
+}
+
+.kb-button--m {
+  height: var(--kb-control-m);
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.kb-button--s {
+  height: var(--kb-control-s);
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.kb-button--icon {
+  width: var(--kb-control-m);
+  height: var(--kb-control-m);
+  padding: 0;
+  background: var(--kb-ink-700);
+  border-color: var(--kb-hairline);
+  color: var(--kb-text-mid);
+}
+
+.kb-button--icon:hover:not(:disabled) {
+  border-color: var(--kb-hairline-strong);
+  color: var(--kb-text-hi);
+}
+
+.kb-button--block {
+  width: 100%;
+}
+
+/* ── primary ────────────────────────────────────────────────────────────── */
+.kb-button--primary {
+  background: var(--kb-ember-500);
+  color: var(--kb-ember-900);
+  font-weight: 700;
+}
+
+.kb-button--primary:hover:not(:disabled) {
+  background: var(--kb-ember-400);
+}
+
+.kb-button--primary:active:not(:disabled) {
+  background: var(--kb-ember-600);
+  transform: scale(0.985);
+}
+
+.kb-button--primary:disabled {
+  background: var(--kb-ink-600);
+  color: var(--kb-text-disabled);
+}
+
+.kb-button--primary[aria-busy='true'] {
+  background: var(--kb-ember-600);
+  color: rgb(42 19 5 / 60%);
+}
+
+/* ── secondary ──────────────────────────────────────────────────────────── */
+.kb-button--secondary {
+  background: var(--kb-ink-700);
+  border-color: var(--kb-hairline);
+  color: var(--kb-text-hi);
+}
+
+.kb-button--secondary:hover:not(:disabled) {
+  background: var(--kb-ink-600);
+  border-color: var(--kb-hairline-strong);
+}
+
+.kb-button--secondary:active:not(:disabled) {
+  background: var(--kb-ink-800);
+  border-color: var(--kb-hairline-strong);
+  transform: scale(0.985);
+}
+
+.kb-button--secondary:disabled {
+  background: var(--kb-ink-800);
+  border-color: var(--kb-hairline-soft);
+  color: var(--kb-text-disabled);
+}
+
+.kb-button--secondary[aria-busy='true'] {
+  color: var(--kb-text-low);
+}
+
+/* ── ghost ──────────────────────────────────────────────────────────────── */
+.kb-button--ghost {
+  background: transparent;
+  color: var(--kb-text-mid);
+}
+
+.kb-button--ghost:hover:not(:disabled) {
+  background: rgb(255 246 235 / 5%);
+  color: var(--kb-text-hi);
+}
+
+.kb-button--ghost:active:not(:disabled) {
+  background: rgb(255 246 235 / 9%);
+  color: var(--kb-text-hi);
+}
+
+.kb-button--ghost:disabled {
+  color: var(--kb-text-disabled);
+}
+
+/* ── danger ─────────────────────────────────────────────────────────────── */
+.kb-button--danger {
+  background: var(--kb-rose-tint);
+  border-color: rgb(244 88 91 / 30%);
+  color: var(--kb-rose-500);
+}
+
+.kb-button--danger:hover:not(:disabled) {
+  background: rgb(244 88 91 / 20%);
+  border-color: rgb(244 88 91 / 50%);
+  color: var(--kb-rose-400);
+}
+
+/* Подтверждение необратимого действия — заливка целиком, вес 700. */
+.kb-button--danger:active:not(:disabled) {
+  background: var(--kb-rose-500);
+  border-color: var(--kb-rose-500);
+  color: var(--kb-rose-900);
+  font-weight: 700;
+}
+
+.kb-button--danger:disabled {
+  background: var(--kb-ink-800);
+  border-color: var(--kb-hairline-soft);
+  color: var(--kb-text-disabled);
+}
+
+/* ── cashout ────────────────────────────────────────────────────────────── */
+.kb-button--cashout {
+  background: var(--kb-mint-500);
+  color: var(--kb-mint-900);
+  font-weight: 700;
+}
+
+.kb-button--cashout:hover:not(:disabled) {
+  background: var(--kb-mint-400);
+}
+
+.kb-button--cashout:active:not(:disabled) {
+  background: var(--kb-mint-600);
+  transform: scale(0.985);
+}
+
+.kb-button--cashout:disabled {
+  background: var(--kb-ink-600);
+  color: var(--kb-text-disabled);
+}
+
+/* ── market ─────────────────────────────────────────────────────────────── */
+
+/**
+ * Зелёная основная кнопка маркетов. Отдельный вариант, а не cashout: там кнопка
+ * забирает уже выигранное, здесь — открывает позицию. Совпадение цвета случайно
+ * и не должно связывать два разных действия одним компонентом.
+ */
+.kb-button--market {
+  background: var(--kb-mint-500);
+  color: var(--kb-mint-900);
+  font-weight: 700;
+}
+
+.kb-button--market:hover:not(:disabled) {
+  background: var(--kb-mint-400);
+}
+
+.kb-button--market:active:not(:disabled) {
+  background: var(--kb-mint-600);
+  transform: scale(0.985);
+}
+
+.kb-button--market:disabled {
+  background: var(--kb-ink-600);
+  color: var(--kb-text-disabled);
+}
+
+/* ── Спиннер внутри кнопки ──────────────────────────────────────────────── */
+.kb-button__spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--kb-radius-full);
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  opacity: 0.45;
+  animation: kb-spin 700ms linear infinite;
+  flex-shrink: 0;
+}
+
+.kb-button--primary .kb-button__spinner {
+  border-color: rgb(42 19 5 / 35%);
+  border-top-color: var(--kb-ember-900);
+  opacity: 1;
+}
+
+.kb-button--cashout .kb-button__spinner,
+.kb-button--market .kb-button__spinner {
+  border-color: rgb(4 41 29 / 35%);
+  border-top-color: var(--kb-mint-900);
+  opacity: 1;
+}
+
+.kb-button--secondary .kb-button__spinner {
+  border-color: var(--kb-hairline-strong);
+  border-top-color: var(--kb-text-mid);
+  opacity: 1;
+}

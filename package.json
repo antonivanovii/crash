@@ -1,0 +1,45 @@
+{
+  "name": "kobold",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "build": "pnpm build:packages && pnpm -r --filter \"./apps/*\" build",
+    "build:packages": "tsc -b packages/money packages/game-engine packages/contracts packages/db packages/ui",
+    "dev": "pnpm build:packages && pnpm -r --parallel dev",
+    "dev:web": "pnpm build:packages && pnpm --filter @kobold/web dev",
+    "dev:api": "pnpm build:packages && pnpm --filter @kobold/api dev",
+    "typecheck": "pnpm build:packages && pnpm -r typecheck",
+    "test": "pnpm build:packages && pnpm -r test",
+    "test:watch": "pnpm --filter @kobold/game-engine test:watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "pnpm -r exec rm -rf dist .tsbuildinfo *.tsbuildinfo && rm -rf node_modules/.cache",
+    "db:migrate": "pnpm --filter @kobold/db migrate",
+    "db:migrate:down": "pnpm --filter @kobold/db migrate:down",
+    "db:reset": "pnpm --filter @kobold/db reset",
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down",
+    "infra:nuke": "docker compose down -v"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.4.1",
+    "eslint": "10.9.1",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "16.5.0",
+    "prettier": "3.9.6",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.69.0",
+    "vitest": "5.0.0"
+  }
+}

@@ -1,0 +1,20 @@
+.verify-form {
+  display: grid;
+  gap: var(--kb-space-3);
+  max-width: 640px;
+}
+
+.verify-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-space-1);
+}
+
+.verify-form__output {
+  margin: 0;
+  padding: var(--kb-space-3);
+  background: var(--kb-ink-700);
+  border-radius: var(--kb-radius-s);
+  white-space: pre-wrap;
+  color: var(--kb-text-hi);
+}

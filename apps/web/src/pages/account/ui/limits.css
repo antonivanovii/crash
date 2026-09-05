@@ -1,0 +1,115 @@
+/* ── Лимиты ─────────────────────────────────────────────────────────────── */
+.limits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--kb-space-4);
+}
+
+.limits-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--kb-space-4);
+  margin-top: var(--kb-space-4);
+}
+
+.limit-card {
+  display: grid;
+  gap: var(--kb-space-3);
+  align-content: start;
+  padding: 18px;
+  border-radius: var(--kb-radius-m);
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+}
+
+/* Действующий лимит времени — единственный, который прямо сейчас тикает. */
+.limit-card--accent {
+  border-color: rgb(232 178 58 / 30%);
+}
+
+.limit-card--danger {
+  background: var(--kb-rose-tint-soft);
+  border-color: var(--kb-rose-line);
+}
+
+.limit-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kb-space-2);
+}
+
+.limit-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.limit-card__title--danger {
+  color: var(--kb-rose-500);
+}
+
+.limit-card__note {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--kb-text-low);
+}
+
+.limit-card__value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--kb-space-2);
+}
+
+.limit-card__number {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--kb-amber-500);
+}
+
+.limit-card__unit {
+  font-size: 13px;
+  color: var(--kb-text-mid);
+}
+
+.limit-card__options {
+  display: grid;
+  gap: 9px;
+}
+
+.limit-card__chips {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-2);
+  flex-wrap: wrap;
+}
+
+/**
+ * Отложенная заявка. В макете этого блока нет — он достроен, потому что без
+ * него правило «ослабление через сутки» существует только в тексте, а игрок
+ * не понимает, почему поле показывает не то, что он ввёл.
+ */
+.limit-card__pending {
+  display: grid;
+  gap: var(--kb-space-2);
+  padding: 11px 12px;
+  border-radius: var(--kb-radius-s);
+  background: rgb(232 178 58 / 9%);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--kb-text-mid);
+  justify-items: start;
+}
+
+@media (max-width: 1279px) {
+  .limits-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 899px) {
+  .limits-grid,
+  .limits-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,203 @@
+/**
+ * Навигация. Макеты: сайдбар лобби и спорта (232px), навигация аккаунта (216px),
+ * мобильный таббар (66px).
+ */
+
+/* ── Сайдбар раздела ────────────────────────────────────────────────────── */
+.kb-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  height: 100%;
+  padding: 20px 14px;
+  background: var(--kb-ink-850);
+  border-right: 1px solid var(--kb-hairline);
+  overflow-y: auto;
+}
+
+.kb-sidebar__groups {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Прижат вниз: карточка честности в лобби, формат коэффициентов в спорте. */
+.kb-sidebar__footer {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.kb-sidebar__group-title {
+  padding: 0 10px;
+  margin-bottom: var(--kb-space-2);
+  font-family: var(--kb-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kb-text-disabled);
+}
+
+.kb-sidebar__items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kb-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  background: none;
+  border: none;
+  border-radius: var(--kb-radius-s);
+  font-family: var(--kb-font-ui);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--kb-text-mid);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-sidebar__item:hover:not(.kb-sidebar__item--active):not(.kb-sidebar__item--empty) {
+  background: rgb(255 246 235 / 4%);
+  color: var(--kb-text-hi);
+}
+
+.kb-sidebar__item--active {
+  background: var(--kb-ember-tint);
+  color: var(--kb-ember-400);
+  font-weight: 600;
+}
+
+.kb-sidebar__item--live {
+  background: rgb(110 134 255 / 12%);
+  color: var(--kb-slate-300);
+  font-weight: 600;
+}
+
+/* Пустая категория остаётся видимой, но не зовёт нажать. */
+.kb-sidebar__item--empty {
+  color: var(--kb-text-disabled);
+  cursor: default;
+}
+
+.kb-sidebar__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kb-sidebar__count {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+.kb-sidebar__item--empty .kb-sidebar__count {
+  color: var(--kb-ink-500);
+}
+
+.kb-sidebar__item:not(.kb-sidebar__item--active) .kb-sidebar__count {
+  color: var(--kb-text-disabled);
+}
+
+.kb-sidebar__item--active .kb-sidebar__count {
+  color: var(--kb-text-low);
+}
+
+.kb-sidebar__pulse {
+  width: 6px;
+  height: 6px;
+  margin: 0 5px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-slate-500);
+  animation: kb-pulse 1.4s infinite;
+  flex-shrink: 0;
+}
+
+/* ── Нижний таббар ──────────────────────────────────────────────────────── */
+.kb-tabbar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  height: var(--kb-tabbar-height);
+  padding: 0 var(--kb-space-1);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--kb-ink-850);
+  border-top: 1px solid var(--kb-hairline);
+  flex-shrink: 0;
+}
+
+.kb-tabbar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: var(--kb-font-ui);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--kb-text-low);
+  cursor: pointer;
+  justify-content: center;
+  transition: color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-tabbar__item--active {
+  color: var(--kb-ember-400);
+  font-weight: 600;
+}
+
+.kb-tabbar__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+}
+
+.kb-tabbar__badge {
+  position: absolute;
+  top: -4px;
+  right: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ember-500);
+  color: var(--kb-ember-900);
+  font-family: var(--kb-font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+/* Подпись не имеет права распирать колонку: на 390px пять вкладок впритык. */
+.kb-tabbar {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.kb-tabbar__item {
+  min-width: 0;
+}
+
+.kb-tabbar__label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

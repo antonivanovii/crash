@@ -1,0 +1,139 @@
+/**
+ * Загрузка и пустые состояния. Макет: UI Kit → «Загрузка», «Пустые состояния».
+ * Shimmer 1.2 с. Пустой экран — маскот 96 px и ровно одно действие.
+ */
+
+.kb-skeleton {
+  border-radius: var(--kb-radius-xs);
+  background: linear-gradient(
+    90deg,
+    var(--kb-ink-800) 0,
+    var(--kb-ink-700) 130px,
+    var(--kb-ink-800) 260px
+  );
+  background-size: 260px 100%;
+  animation: kb-shimmer var(--kb-duration-shimmer) infinite linear;
+}
+
+.kb-skeleton--tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+}
+
+.kb-skeleton--line {
+  height: 14px;
+}
+
+/* Строки текста гаснут к последней: так блок читается как абзац, а не как сетка. */
+.kb-skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kb-skeleton-lines > :nth-child(1) {
+  width: 70%;
+  background: var(--kb-ink-700);
+  animation: none;
+}
+
+.kb-skeleton-lines > :nth-child(2) {
+  width: 45%;
+  background: #1f1b18;
+  animation: none;
+}
+
+.kb-skeleton-lines > :nth-child(3) {
+  width: 58%;
+  background: var(--kb-ink-800);
+  animation: none;
+}
+
+.kb-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--kb-radius-full);
+  border: 2px solid var(--kb-ink-600);
+  border-top-color: var(--kb-ember-500);
+  animation: kb-spin 700ms linear infinite;
+  flex-shrink: 0;
+}
+
+.kb-spinner--s {
+  width: 14px;
+  height: 14px;
+}
+
+/* Плашка «идёт операция» — с текстом, что именно происходит и что делать. */
+.kb-pending {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  font-size: 13px;
+  color: var(--kb-text-mid);
+}
+
+/* ── Пустое состояние ───────────────────────────────────────────────────── */
+.kb-empty {
+  padding: 26px;
+  border-radius: var(--kb-radius-m);
+  background: var(--kb-ink-800);
+  border: 1px dashed var(--kb-hairline-strong);
+  text-align: center;
+}
+
+.kb-empty__art {
+  margin: 0 auto var(--kb-space-4) auto;
+}
+
+.kb-empty__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+  margin-bottom: 6px;
+}
+
+.kb-empty__note {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--kb-text-mid);
+  margin-bottom: var(--kb-space-4);
+}
+
+/* Компактный вариант: ничего не нашлось, поиск, фильтр. */
+.kb-empty--inline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-style: solid;
+  border-color: var(--kb-hairline);
+  text-align: left;
+}
+
+.kb-empty--inline .kb-empty__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--kb-ink-700);
+  color: var(--kb-text-low);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.kb-empty--inline .kb-empty__title {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.kb-empty--inline .kb-empty__note {
+  font-size: 12.5px;
+  margin-bottom: 0;
+}

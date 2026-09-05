@@ -1,0 +1,52 @@
+.casino-sidebar__level {
+  display: grid;
+  gap: var(--kb-space-2);
+  padding: 14px;
+  margin-bottom: 2px;
+  border-radius: var(--kb-radius-m);
+  background: rgb(232 178 58 / 8%);
+  border: 1px solid var(--kb-amber-line);
+}
+
+.casino-sidebar__level-head {
+  display: grid;
+  gap: 2px;
+}
+
+.casino-sidebar__level-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--kb-amber-500);
+}
+
+.casino-sidebar__level-left {
+  font-size: 10.5px;
+  color: var(--kb-text-low);
+}
+
+.casino-sidebar__level-note {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--kb-text-mid);
+}
+
+.casino-sidebar__fairness {
+  display: grid;
+  gap: var(--kb-space-2);
+  padding: 14px;
+  border-radius: var(--kb-radius-m);
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+}
+
+.casino-sidebar__fairness-note {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--kb-text-mid);
+}
+
+.casino-sidebar__link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--kb-ember-400);
+}

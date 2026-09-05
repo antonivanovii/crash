@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: kobold-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kobold
+      POSTGRES_PASSWORD: kobold
+      POSTGRES_DB: kobold
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    command:
+      # READ COMMITTED + явные FOR UPDATE — см. docs/ARCHITECTURE.md
+      - postgres
+      - -c
+      - default_transaction_isolation=read committed
+      - -c
+      - max_connections=200
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U kobold -d kobold']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: kobold-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redisdata:/data
+    # appendonly — BullMQ переживает рестарт; раунды при этом всё равно живут в Postgres.
+    command: ['redis-server', '--appendonly', 'yes']
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
+  redisdata:

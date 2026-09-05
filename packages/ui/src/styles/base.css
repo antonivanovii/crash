@@ -1,0 +1,170 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--kb-ink-900);
+}
+
+body {
+  font-family: var(--kb-font-ui);
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  color: var(--kb-text-mid);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--kb-ember-500);
+  text-decoration: none;
+  transition: color var(--kb-duration-hover) var(--kb-ease);
+}
+
+a:hover {
+  color: var(--kb-ember-400);
+}
+
+::selection {
+  background: rgb(255 107 44 / 30%);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/**
+ * Браузер рисует у полей собственную рамку и служебные элементы — у
+ * input[type=search] это внутренний контур и крестик очистки. В системе их
+ * нет: рамку задаёт контейнер, очистку — своя кнопка.
+ */
+input,
+textarea,
+select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button {
+  appearance: none;
+  -webkit-appearance: none;
+  display: none;
+}
+
+/* Фокус янтарный и всегда видимый — это часть системы, а не браузерный дефолт. */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--kb-focus-ring);
+}
+
+/* ── Типографические роли ───────────────────────────────────────────────── */
+
+/**
+ * Деньги, коэффициенты, seed, nonce и хэши — всегда моношириной с tabular-nums.
+ * Без этого цифры дёргаются по ширине при каждой смене: roll-up в Limbo,
+ * растущий множитель в crash, тикающий баланс.
+ */
+.kb-num {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.kb-display-xl {
+  font-family: var(--kb-font-ui);
+  font-size: 56px;
+  line-height: 58px;
+  font-weight: 800;
+  font-stretch: var(--kb-width-display);
+  letter-spacing: -0.025em;
+  color: var(--kb-text-hi);
+}
+
+.kb-display-m {
+  font-family: var(--kb-font-ui);
+  font-size: 34px;
+  line-height: 38px;
+  font-weight: 700;
+  font-stretch: 108%;
+  letter-spacing: -0.02em;
+  color: var(--kb-text-hi);
+}
+
+.kb-title-l {
+  font-family: var(--kb-font-ui);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--kb-text-hi);
+}
+
+.kb-title-s {
+  font-family: var(--kb-font-ui);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.kb-body {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  color: var(--kb-text-mid);
+}
+
+.kb-caption {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--kb-text-low);
+}
+
+.kb-overline {
+  font-family: var(--kb-font-mono);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+.kb-money-l {
+  font-family: var(--kb-font-mono);
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--kb-text-hi);
+}
+
+.kb-money-s {
+  font-family: var(--kb-font-mono);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--kb-text-hi);
+}

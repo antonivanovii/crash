@@ -1,0 +1,229 @@
+/* Топбар. Макет: 64px на десктопе, 52px на мобильном. Не скроллится никогда. */
+.app-topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-5);
+  height: var(--kb-header-height);
+  padding: 0 var(--kb-space-6);
+  background: var(--kb-ink-850);
+  border-bottom: 1px solid var(--kb-hairline);
+  flex-shrink: 0;
+}
+
+.app-topbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.app-topbar__wordmark {
+  font-family: var(--kb-font-ui);
+  font-size: 14px;
+  font-weight: 800;
+  font-stretch: var(--kb-width-display);
+  letter-spacing: 0.15em;
+  color: var(--kb-text-hi);
+}
+
+/* ── Разделы ────────────────────────────────────────────────────────────── */
+.app-topbar__nav {
+  display: flex;
+  gap: var(--kb-space-1);
+  margin-left: var(--kb-space-3);
+}
+
+.app-topbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--kb-control-m);
+  padding: 0 14px;
+  border-radius: var(--kb-radius-s);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--kb-text-mid);
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.app-topbar__link:hover {
+  background: rgb(255 246 235 / 4%);
+  color: var(--kb-text-hi);
+}
+
+/* Янтарь — только действие и текущий раздел. */
+.app-topbar__link.is-active {
+  background: var(--kb-ember-tint);
+  color: var(--kb-ember-400);
+  font-weight: 600;
+}
+
+.app-topbar__search {
+  width: 260px;
+  margin-left: auto;
+}
+
+/* Поле поиска в топбаре ниже стандартных 48px. */
+.app-topbar__search .kb-search {
+  height: 38px;
+  background: var(--kb-ink-700);
+}
+
+.app-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+  margin-left: auto;
+}
+
+.app-topbar__search + .app-topbar__right {
+  margin-left: 0;
+}
+
+/* ── Баланс ─────────────────────────────────────────────────────────────── */
+.app-topbar__balance {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 5px 5px 14px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+}
+
+.app-topbar__balance-label {
+  font-family: var(--kb-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+.app-topbar__balance-value {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--kb-text-hi);
+  white-space: nowrap;
+}
+
+/* ── Уведомления и аватар ───────────────────────────────────────────────── */
+.app-topbar__bell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--kb-ink-800);
+  flex-shrink: 0;
+}
+
+.app-topbar__bell .kb-counter {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+/* Колокольчик из примитивов: купол и язычок. */
+.app-topbar__bell-glyph {
+  width: 14px;
+  height: 14px;
+  border: 1.75px solid var(--kb-text-mid);
+  border-radius: 7px 7px 3px 3px;
+  border-bottom-width: 3px;
+}
+
+.app-topbar__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgb(255 107 44 / 16%);
+  border: 1px solid var(--kb-ember-line);
+  flex-shrink: 0;
+}
+
+/* ── Бургер ─────────────────────────────────────────────────────────────── */
+
+/* Появляется только там, где сайдбар стал шторкой. */
+.app-topbar__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: var(--kb-control-m);
+  height: var(--kb-control-m);
+  padding: 0 9px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: var(--kb-radius-s);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.app-topbar__burger span {
+  height: 1.75px;
+  border-radius: 2px;
+  background: var(--kb-text-mid);
+}
+
+@media (max-width: 1279px) {
+  .app-topbar__burger {
+    display: flex;
+  }
+
+  /**
+   * Ниже 1280 в строку не помещаются сразу поиск, статус связи и разделы.
+   * Первым уходит поиск: его роль берёт на себя навигация раздела, а статус
+   * связи важнее — от него зависит, засчитается ли кэшаут.
+   */
+  .app-topbar__search {
+    display: none;
+  }
+
+  .app-topbar__right {
+    margin-left: auto;
+  }
+}
+
+/* Статус связи уходит последним, уже вместе с разделами. */
+@media (max-width: 1023px) {
+  .app-topbar .kb-status--inline {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .app-topbar {
+    height: var(--kb-header-height-mobile);
+    gap: 10px;
+    padding: 0 var(--kb-page-padding-mobile);
+  }
+
+  .app-topbar__balance {
+    padding: 5px 5px 5px 12px;
+    border-radius: 9px;
+    margin-left: auto;
+  }
+
+  .app-topbar__balance-label {
+    display: none;
+  }
+
+  .app-topbar__balance-value {
+    font-size: 13px;
+  }
+
+  .app-topbar__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+}

@@ -1,0 +1,311 @@
+/**
+ * Статусы и метки. Макет: UI Kit → «Статусы и метки», h 22–26 · mono 11.
+ */
+.kb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--kb-badge-height);
+  padding: 0 9px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ink-600);
+  font-family: var(--kb-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--kb-text-mid);
+  white-space: nowrap;
+}
+
+/* Компактный вариант: внутри карточки и на мобильном, где 24px спорят с текстом. */
+.kb-badge--s {
+  height: var(--kb-badge-height-s);
+  padding: 0 7px;
+  font-size: 9.5px;
+  gap: 5px;
+}
+
+.kb-badge--live {
+  background: var(--kb-slate-tint);
+  color: var(--kb-slate-300);
+}
+
+.kb-badge--win {
+  background: var(--kb-mint-tint);
+  color: var(--kb-mint-500);
+}
+
+.kb-badge--loss {
+  background: var(--kb-rose-tint);
+  color: var(--kb-rose-500);
+}
+
+.kb-badge--escrow {
+  background: var(--kb-amber-tint);
+  color: var(--kb-amber-500);
+}
+
+.kb-badge--muted {
+  background: var(--kb-ink-600);
+  color: var(--kb-text-low);
+}
+
+/* NEW и подобные — прямоугольный бейдж, r 4, вес 700. */
+.kb-badge--tag {
+  border-radius: var(--kb-radius-xs);
+  background: var(--kb-ember-500);
+  color: var(--kb-ember-900);
+  font-weight: 700;
+}
+
+.kb-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--kb-radius-full);
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Пульсирует только живое: LIVE-метка идущего раунда. */
+.kb-badge--live .kb-badge__dot {
+  background: var(--kb-slate-500);
+  animation: kb-pulse 1.4s infinite;
+}
+
+/* Счётчик непрочитанного. */
+.kb-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-rose-500);
+  color: var(--kb-rose-900);
+  font-family: var(--kb-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── Статус соединения ──────────────────────────────────────────────────── */
+.kb-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--kb-hairline);
+  background: var(--kb-ink-800);
+}
+
+.kb-status--online {
+  background: var(--kb-mint-tint-soft);
+  border-color: var(--kb-mint-line);
+}
+
+.kb-status--offline {
+  background: var(--kb-rose-tint-soft);
+  border-color: var(--kb-rose-line);
+}
+
+.kb-status--connecting {
+  background: var(--kb-amber-tint-soft);
+  border-color: var(--kb-amber-line);
+}
+
+.kb-status__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--kb-radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.kb-status--online .kb-status__icon {
+  background: rgb(63 216 164 / 20%);
+  color: var(--kb-mint-500);
+}
+
+.kb-status--offline .kb-status__icon {
+  background: rgb(244 88 91 / 18%);
+  color: var(--kb-rose-500);
+}
+
+.kb-status--connecting .kb-status__icon {
+  background: rgb(232 178 58 / 20%);
+  color: var(--kb-amber-500);
+}
+
+.kb-status__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.kb-status__note {
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+/* Компактный вид для хедера — точка и подпись, без карточки. */
+.kb-status--inline {
+  padding: 0;
+  background: none;
+  border: none;
+  gap: var(--kb-space-2);
+  font-family: var(--kb-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+.kb-status--inline .kb-status__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-text-low);
+}
+
+.kb-status--inline.kb-status--online .kb-status__dot {
+  background: var(--kb-mint-500);
+}
+
+.kb-status--inline.kb-status--connecting .kb-status__dot {
+  background: var(--kb-amber-500);
+  animation: kb-pulse 1.4s infinite;
+}
+
+.kb-status--inline.kb-status--offline .kb-status__dot {
+  background: var(--kb-rose-500);
+}
+
+/* ── Баннер ─────────────────────────────────────────────────────────────── */
+.kb-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--kb-space-3);
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--kb-hairline);
+  background: var(--kb-ink-800);
+}
+
+.kb-alert--warning {
+  background: var(--kb-amber-tint-soft);
+  border-color: var(--kb-amber-line);
+}
+
+.kb-alert--danger {
+  background: var(--kb-rose-tint-soft);
+  border-color: var(--kb-rose-line);
+}
+
+.kb-alert--success {
+  background: var(--kb-mint-tint-soft);
+  border-color: var(--kb-mint-line);
+}
+
+.kb-alert__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.kb-alert--warning .kb-alert__icon {
+  background: rgb(232 178 58 / 20%);
+  color: var(--kb-amber-500);
+}
+
+.kb-alert--danger .kb-alert__icon {
+  background: rgb(244 88 91 / 18%);
+  color: var(--kb-rose-500);
+}
+
+.kb-alert--success .kb-alert__icon {
+  background: rgb(63 216 164 / 20%);
+  color: var(--kb-mint-500);
+}
+
+.kb-alert__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+  margin-bottom: 3px;
+}
+
+.kb-alert__body {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--kb-text-mid);
+}
+
+/* ── Прогресс ───────────────────────────────────────────────────────────── */
+.kb-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+}
+
+.kb-progress__track {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ink-600);
+  overflow: hidden;
+}
+
+.kb-progress__fill {
+  height: 100%;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-amber-500);
+  transition: width var(--kb-duration-counter) var(--kb-ease);
+}
+
+.kb-progress__fill--win {
+  background: var(--kb-mint-500);
+}
+
+.kb-progress__fill--loss {
+  background: var(--kb-rose-500);
+}
+
+.kb-progress__label {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: var(--kb-text-low);
+}
+
+.kb-progress__label--level {
+  color: var(--kb-amber-500);
+}
+
+/* Составной трек баланса: свободно / в эскроу одной полосой. */
+.kb-progress--split .kb-progress__track {
+  display: flex;
+  height: 6px;
+}
+
+.kb-progress__segment {
+  height: 100%;
+}
+
+.kb-progress__segment--free {
+  background: var(--kb-mint-500);
+}
+
+.kb-progress__segment--escrow {
+  background: var(--kb-amber-500);
+}

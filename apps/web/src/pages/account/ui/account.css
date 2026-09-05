@@ -1,0 +1,405 @@
+/* ── Шапка аккаунта ─────────────────────────────────────────────────────── */
+.account-header {
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 24px;
+  border-radius: var(--kb-radius-l);
+  background: var(--kb-ink-850);
+  border: 1px solid var(--kb-hairline);
+}
+
+.account-header__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  background: rgb(255 107 44 / 16%);
+  border: 1px solid var(--kb-ember-line);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.account-header__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-header__name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--kb-space-2);
+}
+
+.account-header__name {
+  font-family: var(--kb-font-ui);
+  font-size: 26px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--kb-text-hi);
+}
+
+.account-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--kb-space-5);
+  font-size: 11.5px;
+  color: var(--kb-text-low);
+}
+
+.account-header__actions {
+  display: flex;
+  gap: var(--kb-space-2);
+  flex-shrink: 0;
+}
+
+/* ── Карточки подразделов ───────────────────────────────────────────────── */
+.account {
+  gap: var(--kb-space-5);
+}
+
+/**
+ * Настройки читаются в колонке, а не во всю ширину: поле ввода на 1100px
+ * заставляет глаз прыгать от подписи к значению через пустоту.
+ */
+.account-card {
+  padding: 22px;
+  background: var(--kb-ink-850);
+  max-width: 780px;
+}
+
+/* Лимитам ширина нужна: три карточки в ряд. */
+.account-card--wide {
+  max-width: none;
+}
+
+.account-card__title,
+.account-card__overline {
+  margin-bottom: 18px;
+}
+
+.account-card__head {
+  margin-bottom: 18px;
+}
+
+.account-card__note {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--kb-text-low);
+  margin-top: 6px;
+}
+
+.account-card__action {
+  margin-top: var(--kb-space-4);
+}
+
+/* ── Формы ──────────────────────────────────────────────────────────────── */
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.account-form__pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--kb-space-3);
+}
+
+.account-form__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: var(--kb-space-1);
+}
+
+.account-field-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.account-field-row .kb-input,
+.account-field-row .kb-select {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-field-note {
+  font-size: 11px;
+  color: var(--kb-text-low);
+  white-space: nowrap;
+}
+
+/* ── Строки настроек ────────────────────────────────────────────────────── */
+.account-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+}
+
+.account-row--success {
+  background: var(--kb-mint-tint-soft);
+  border-color: var(--kb-mint-line);
+}
+
+.account-row--warning {
+  background: var(--kb-amber-tint-soft);
+  border-color: var(--kb-amber-line);
+}
+
+.account-row__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--kb-radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.account-row--success .account-row__icon {
+  background: rgb(63 216 164 / 20%);
+  color: var(--kb-mint-500);
+}
+
+.account-row--warning .account-row__icon {
+  background: rgb(232 178 58 / 20%);
+  color: var(--kb-amber-500);
+}
+
+.account-row__icon--neutral {
+  border-radius: 6px;
+  background: var(--kb-ink-600);
+  color: var(--kb-text-mid);
+}
+
+.account-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-row__title {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-2);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.account-row__note {
+  font-size: 11px;
+  color: var(--kb-text-low);
+  margin-top: 2px;
+}
+
+/* ── Переключатели ──────────────────────────────────────────────────────── */
+.account-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--kb-hairline-soft);
+}
+
+.account-toggle:last-child {
+  border-bottom: none;
+}
+
+.account-toggle__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-toggle__title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.account-toggle__note {
+  font-size: 11.5px;
+  color: var(--kb-text-low);
+  margin-top: 2px;
+}
+
+/* ── Сессии ─────────────────────────────────────────────────────────────── */
+.account-sessions {
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.account-session {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+  padding: 12px 14px;
+  border-top: 1px solid var(--kb-hairline-soft);
+}
+
+.account-session:first-child {
+  border-top: none;
+}
+
+/* Текущее устройство подсвечено: с него отзывать нечего. */
+.account-session.is-current {
+  background: rgb(255 107 44 / 5%);
+}
+
+.account-session__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-session__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.account-session__badge {
+  margin-left: 5px;
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--kb-ember-400);
+}
+
+.account-session__place {
+  font-size: 10.5px;
+  color: var(--kb-text-low);
+  margin-top: 2px;
+}
+
+/* Незнакомое устройство — единственная строка, ради которой сюда заходят. */
+.account-session__place.is-alert {
+  color: var(--kb-rose-500);
+}
+
+.account-session__revoke {
+  color: var(--kb-rose-500);
+}
+
+.account-sessions__revoke-all {
+  margin-top: var(--kb-space-3);
+}
+
+/* ── Верификация ────────────────────────────────────────────────────────── */
+.account-dropzone {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--kb-ink-800);
+  border: 1px dashed var(--kb-hairline-strong);
+  text-align: center;
+  font-size: 13px;
+  color: var(--kb-text-mid);
+}
+
+.account-dropzone__hint {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+/* ── Мобильный список подразделов ───────────────────────────────────────── */
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-2);
+  height: 52px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: var(--kb-ink-850);
+  border: 1px solid var(--kb-hairline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+/* Строка с активным лимитом выделяется: это то, что игрок ищет первым. */
+.account-list__row.is-accent {
+  border-color: rgb(232 178 58 / 30%);
+}
+
+.account-list__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-list__meta {
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+.account-list__meta.is-win {
+  color: var(--kb-mint-500);
+}
+
+.account-list__meta.is-escrow {
+  color: var(--kb-amber-500);
+}
+
+.account-list__chevron {
+  color: var(--kb-text-low);
+}
+
+/* ── Мобильный ──────────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .account-header {
+    padding: 16px;
+    gap: var(--kb-space-3);
+    border-radius: 14px;
+  }
+
+  .account-header__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .account-header__name {
+    font-size: 19px;
+  }
+
+  /* Мета не помещается в две строки и не читается — остаётся в профиле. */
+  .account-header__meta {
+    display: none;
+  }
+
+  .account-header__actions {
+    display: none;
+  }
+
+  .account-card {
+    padding: 16px;
+  }
+
+  .account-form__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

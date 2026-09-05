@@ -1,0 +1,424 @@
+/**
+ * Переключатели. Макет: UI Kit → «Переключатели».
+ * Чипы h 34 · r full · сегменты h 40 (внутри r 6) · свитч 44×24 · чекбокс r 4.
+ */
+
+/* ── Чипы-фильтры ───────────────────────────────────────────────────────── */
+.kb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kb-space-2);
+  height: var(--kb-chip-height);
+  padding: 0 15px;
+  background: var(--kb-ink-700);
+  border: 1px solid var(--kb-hairline);
+  border-radius: var(--kb-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kb-text-mid);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    border-color var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-chip:hover:not(:disabled) {
+  background: var(--kb-ink-600);
+  border-color: var(--kb-hairline-strong);
+  color: var(--kb-text-hi);
+}
+
+.kb-chip--selected {
+  background: var(--kb-ember-500);
+  border-color: var(--kb-ember-500);
+  color: var(--kb-ember-900);
+  font-weight: 600;
+}
+
+.kb-chip--selected:hover:not(:disabled) {
+  background: var(--kb-ember-400);
+  border-color: var(--kb-ember-400);
+  color: var(--kb-ember-900);
+}
+
+.kb-chip:disabled {
+  background: var(--kb-ink-800);
+  border-color: var(--kb-hairline-soft);
+  color: var(--kb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Снимаемый чип: активный фильтр, который можно убрать. */
+.kb-chip--removable {
+  padding: 0 11px 0 15px;
+  background: var(--kb-ember-tint);
+  border-color: var(--kb-ember-line);
+  color: var(--kb-ember-400);
+  font-weight: 600;
+}
+
+.kb-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ── Сегменты ───────────────────────────────────────────────────────────── */
+.kb-segmented {
+  display: inline-flex;
+  padding: var(--kb-space-1);
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+}
+
+.kb-segmented__item {
+  height: 32px;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kb-text-mid);
+  cursor: pointer;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-segmented__item:hover:not(:disabled):not([aria-selected='true']) {
+  color: var(--kb-text-hi);
+}
+
+.kb-segmented__item[aria-selected='true'] {
+  background: var(--kb-ink-500);
+  color: var(--kb-text-hi);
+  font-weight: 600;
+}
+
+.kb-segmented__item:disabled {
+  color: var(--kb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Табы-подчёркивание ─────────────────────────────────────────────────── */
+.kb-tabs {
+  display: flex;
+  gap: var(--kb-space-6);
+  border-bottom: 1px solid var(--kb-hairline);
+}
+
+.kb-tabs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kb-space-2);
+  padding: 0 0 var(--kb-space-3) 0;
+  margin-bottom: -1px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--kb-text-mid);
+  cursor: pointer;
+  transition:
+    color var(--kb-duration-hover) var(--kb-ease),
+    border-color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-tabs__item:hover:not(:disabled):not([aria-selected='true']) {
+  color: var(--kb-text-hi);
+}
+
+.kb-tabs__item[aria-selected='true'] {
+  border-bottom-color: var(--kb-ember-500);
+  color: var(--kb-text-hi);
+  font-weight: 600;
+}
+
+.kb-tabs__item:disabled {
+  color: var(--kb-text-disabled);
+  cursor: not-allowed;
+}
+
+.kb-tabs__count {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--kb-text-low);
+}
+
+/* ── Свитч 44×24 ────────────────────────────────────────────────────────── */
+.kb-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--kb-text-mid);
+}
+
+.kb-switch__track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ink-500);
+  flex-shrink: 0;
+  transition: background var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-text-mid);
+  transition:
+    transform var(--kb-duration-hover) var(--kb-ease),
+    background var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.kb-switch input:checked + .kb-switch__track {
+  background: var(--kb-ember-500);
+}
+
+.kb-switch input:checked + .kb-switch__track .kb-switch__thumb {
+  transform: translateX(20px);
+  background: var(--kb-ember-900);
+}
+
+/* Зелёный — включённая защита, янтарь — действующий лимит. */
+.kb-switch--win input:checked + .kb-switch__track {
+  background: var(--kb-mint-500);
+}
+
+.kb-switch--win input:checked + .kb-switch__track .kb-switch__thumb {
+  background: var(--kb-mint-900);
+}
+
+.kb-switch--amber input:checked + .kb-switch__track {
+  background: var(--kb-amber-500);
+}
+
+.kb-switch input:checked ~ .kb-switch__label {
+  color: var(--kb-text-hi);
+}
+
+.kb-switch input:focus-visible + .kb-switch__track {
+  box-shadow: var(--kb-focus-ring);
+}
+
+.kb-switch input:disabled + .kb-switch__track {
+  background: var(--kb-ink-700);
+}
+
+.kb-switch input:disabled + .kb-switch__track .kb-switch__thumb {
+  background: var(--kb-ink-500);
+}
+
+.kb-switch:has(input:disabled) {
+  color: var(--kb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Чекбокс и радио ────────────────────────────────────────────────────── */
+.kb-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--kb-text-mid);
+  cursor: pointer;
+}
+
+.kb-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.kb-check__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--kb-hairline-strong);
+  border-radius: var(--kb-radius-xs);
+  flex-shrink: 0;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    border-color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-check--radio .kb-check__box {
+  border-radius: var(--kb-radius-full);
+}
+
+.kb-check__mark {
+  color: var(--kb-ember-900);
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0;
+  line-height: 1;
+}
+
+.kb-check input:checked + .kb-check__box {
+  background: var(--kb-ember-500);
+  border-color: var(--kb-ember-500);
+}
+
+.kb-check input:checked + .kb-check__box .kb-check__mark {
+  opacity: 1;
+}
+
+/* У радио точка внутри кольца, заливки нет. */
+.kb-check--radio input:checked + .kb-check__box {
+  background: none;
+  border-color: var(--kb-ember-500);
+}
+
+.kb-check--radio .kb-check__mark {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ember-500);
+}
+
+.kb-check input:checked ~ .kb-check__label {
+  color: var(--kb-text-hi);
+}
+
+.kb-check input:focus-visible + .kb-check__box {
+  box-shadow: var(--kb-focus-ring);
+}
+
+.kb-check:has(input:disabled) {
+  color: var(--kb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Слайдер ────────────────────────────────────────────────────────────── */
+.kb-slider__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--kb-text-low);
+  margin-bottom: var(--kb-space-3);
+}
+
+.kb-slider__value {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--kb-text-hi);
+}
+
+.kb-slider__control {
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: none;
+  cursor: pointer;
+  /* Трек рисуется градиентом по --kb-slider-progress, который ставит компонент. */
+  --kb-slider-progress: 0%;
+}
+
+.kb-slider__control::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--kb-radius-full);
+  background: linear-gradient(
+    to right,
+    var(--kb-ember-500) var(--kb-slider-progress),
+    var(--kb-ink-600) var(--kb-slider-progress)
+  );
+}
+
+.kb-slider__control::-moz-range-track {
+  height: 6px;
+  border-radius: var(--kb-radius-full);
+  background: linear-gradient(
+    to right,
+    var(--kb-ember-500) var(--kb-slider-progress),
+    var(--kb-ink-600) var(--kb-slider-progress)
+  );
+}
+
+.kb-slider__control::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  border: 3px solid var(--kb-ember-500);
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-text-hi);
+}
+
+.kb-slider__control::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--kb-ember-500);
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-text-hi);
+}
+
+.kb-slider__control:focus-visible {
+  outline: none;
+}
+
+.kb-slider__control:focus-visible::-webkit-slider-thumb {
+  box-shadow: var(--kb-focus-ring);
+}
+
+/* Янтарный слайдер: лимит времени сессии, который подсвечивает всю карточку. */
+.kb-slider--amber .kb-slider__control::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    var(--kb-amber-500) var(--kb-slider-progress),
+    var(--kb-ink-600) var(--kb-slider-progress)
+  );
+}
+
+.kb-slider--amber .kb-slider__control::-moz-range-track {
+  background: linear-gradient(
+    to right,
+    var(--kb-amber-500) var(--kb-slider-progress),
+    var(--kb-ink-600) var(--kb-slider-progress)
+  );
+}
+
+.kb-slider--amber .kb-slider__control::-webkit-slider-thumb {
+  border-color: var(--kb-amber-500);
+}
+
+.kb-slider--amber .kb-slider__control::-moz-range-thumb {
+  border-color: var(--kb-amber-500);
+}
+
+.kb-slider__scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--kb-space-2);
+  font-family: var(--kb-font-mono);
+  font-size: 11px;
+  color: var(--kb-text-low);
+}

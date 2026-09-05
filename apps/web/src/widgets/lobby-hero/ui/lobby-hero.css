@@ -1,0 +1,155 @@
+.lobby-hero {
+  display: grid;
+  grid-template-columns: 1fr 316px;
+  gap: var(--kb-space-4);
+}
+
+/* ── Промо ──────────────────────────────────────────────────────────────── */
+.lobby-hero__promo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 236px;
+  padding: 30px 34px;
+  border-radius: var(--kb-radius-l);
+  border: 1px solid var(--kb-ember-line);
+  background:
+    radial-gradient(90% 140% at 82% 20%, rgb(255 107 44 / 18%), rgb(255 107 44 / 0%) 62%),
+    #17130f;
+  overflow: hidden;
+}
+
+.lobby-hero__promo-body {
+  max-width: 56%;
+}
+
+.lobby-hero__kicker {
+  color: var(--kb-ember-400);
+  letter-spacing: 0.16em;
+  margin-bottom: var(--kb-space-3);
+}
+
+.lobby-hero__title {
+  font-family: var(--kb-font-ui);
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 800;
+  font-stretch: 110%;
+  letter-spacing: -0.02em;
+  color: var(--kb-text-hi);
+  margin-bottom: var(--kb-space-3);
+}
+
+.lobby-hero__note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--kb-text-mid);
+}
+
+.lobby-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+  margin-top: var(--kb-space-5);
+}
+
+.lobby-hero__mascot {
+  position: absolute;
+  right: 34px;
+  top: 20px;
+}
+
+/* ── Правая колонка ─────────────────────────────────────────────────────── */
+.lobby-hero__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-space-3);
+}
+
+.lobby-hero__stats {
+  flex: 1;
+  background: var(--kb-ink-850);
+  padding: 18px 20px;
+}
+
+.lobby-hero__stats-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--kb-space-2);
+}
+
+.lobby-hero__online {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--kb-slate-300);
+}
+
+.lobby-hero__divider {
+  height: 1px;
+  background: var(--kb-hairline-soft);
+  margin: var(--kb-space-4) 0;
+}
+
+.lobby-hero__stats .kb-stat-row + .kb-stat-row {
+  margin-top: var(--kb-space-2);
+}
+
+.lobby-hero__tournament {
+  display: grid;
+  gap: 6px;
+  padding: 16px 20px;
+  background: rgb(110 134 255 / 6%);
+  border-color: rgb(110 134 255 / 24%);
+}
+
+.lobby-hero__tournament-kicker {
+  color: var(--kb-slate-300);
+  letter-spacing: 0.12em;
+}
+
+/* ── Планшет и мобильный ────────────────────────────────────────────────── */
+@media (max-width: 1279px) {
+  .lobby-hero {
+    grid-template-columns: 1fr 280px;
+  }
+}
+
+@media (max-width: 899px) {
+  .lobby-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .lobby-hero__promo {
+    min-height: 0;
+    padding: 18px;
+    border-radius: 14px;
+    background:
+      radial-gradient(120% 130% at 88% 12%, rgb(255 107 44 / 20%), rgb(255 107 44 / 0%) 62%),
+      #17130f;
+  }
+
+  .lobby-hero__promo-body {
+    max-width: 62%;
+  }
+
+  .lobby-hero__title {
+    font-size: 22px;
+    line-height: 1.1;
+  }
+
+  .lobby-hero__note {
+    font-size: 12px;
+  }
+
+  .lobby-hero__actions {
+    margin-top: var(--kb-space-4);
+  }
+
+  .lobby-hero__mascot {
+    right: -6px;
+    top: 14px;
+  }
+}

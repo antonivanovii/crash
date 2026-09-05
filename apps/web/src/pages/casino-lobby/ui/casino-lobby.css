@@ -1,0 +1,140 @@
+.lobby {
+  gap: 28px;
+}
+
+/* ── Фильтры ────────────────────────────────────────────────────────────── */
+.lobby__filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Сортировка прижата вправо; компактный рост задан самим компонентом. */
+.lobby__sort {
+  margin-left: auto;
+}
+
+/* Список открывается влево: у правого края экрана ему не хватит места. */
+.lobby__sort .kb-select__list {
+  left: auto;
+  right: 0;
+}
+
+/* ── Сетка игр ──────────────────────────────────────────────────────────── */
+.lobby__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--kb-space-3);
+}
+
+/* ── Низ ────────────────────────────────────────────────────────────────── */
+.lobby__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: var(--kb-space-4);
+  align-items: start;
+}
+
+.lobby__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-space-4);
+}
+
+.lobby__continue {
+  display: grid;
+  gap: var(--kb-space-3);
+  padding: 18px 20px;
+}
+
+.lobby__continue-row {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+  padding: 12px;
+  border-radius: 10px;
+  background: rgb(255 107 44 / 8%);
+  border: 1px solid var(--kb-ember-line);
+}
+
+.lobby__continue-art {
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.lobby__continue-thumb {
+  border: none;
+  border-radius: var(--kb-radius-s);
+}
+
+.lobby__continue-thumb .game-card__footer {
+  display: none;
+}
+
+.lobby__continue-body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.lobby__continue-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.lobby__continue-note {
+  font-size: 11px;
+  color: var(--kb-text-mid);
+}
+
+.lobby__empty {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--kb-text-low);
+}
+
+/* ── Планшет ────────────────────────────────────────────────────────────── */
+@media (max-width: 1279px) {
+  .lobby__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ── Мобильный ──────────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .lobby {
+    gap: 20px;
+  }
+
+  /* Чипы уезжают за край, а не переносятся: так видно, что список длиннее. */
+  .lobby__filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * var(--kb-page-padding-mobile));
+    padding: 0 var(--kb-page-padding-mobile);
+  }
+
+  .lobby__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lobby__filters .kb-chip {
+    height: var(--kb-chip-height-mobile);
+    padding: 0 13px;
+    font-size: 12.5px;
+    flex-shrink: 0;
+  }
+
+  .lobby__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--kb-space-2);
+  }
+
+  .lobby__bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

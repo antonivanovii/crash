@@ -1,0 +1,132 @@
+.win-feed {
+  background: var(--kb-ink-850);
+}
+
+.win-feed__head {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-5);
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--kb-hairline);
+}
+
+/* Табы внутри шапки не должны тянуть свою нижнюю границу. */
+.win-feed__head .kb-tabs {
+  border-bottom: none;
+  gap: var(--kb-space-4);
+}
+
+.win-feed__head .kb-tabs__item {
+  padding-bottom: 3px;
+  font-size: 12.5px;
+}
+
+.win-feed__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.win-feed__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 0.7fr) minmax(0, 0.8fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: var(--kb-space-2);
+  padding: 12px 18px;
+  border-top: 1px solid var(--kb-hairline-soft);
+  font-size: 13px;
+}
+
+.win-feed__row > * {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.win-feed__row--head {
+  padding: 9px 18px;
+  border-top: none;
+  background: rgb(255 246 235 / 2%);
+  font-family: var(--kb-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+/* Своя строка находится взглядом, а не поиском. */
+.win-feed__row.is-mine {
+  background: rgb(255 107 44 / 5%);
+}
+
+.win-feed__game {
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.win-feed__player {
+  color: var(--kb-text-mid);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.win-feed__row.is-mine .win-feed__player {
+  color: var(--kb-text-hi);
+}
+
+.win-feed__me {
+  margin-left: 5px;
+  font-family: var(--kb-font-mono);
+  font-size: 10px;
+  color: var(--kb-ember-400);
+}
+
+.win-feed__num {
+  text-align: right;
+  font-size: 12.5px;
+  color: var(--kb-text-mid);
+}
+
+.win-feed__multiplier {
+  color: var(--kb-text-hi);
+}
+
+.win-feed__payout {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--kb-mint-500);
+}
+
+.win-feed__payout.is-loss {
+  color: var(--kb-rose-500);
+}
+
+.win-feed__row--head span:nth-child(n + 3),
+.win-feed__num {
+  text-align: right;
+}
+
+/* На мобильном лента сжимается до трёх колонок: игрок и ставка уходят. */
+@media (max-width: 899px) {
+  .win-feed__head {
+    gap: var(--kb-space-3);
+    padding: 12px 14px;
+  }
+
+  .win-feed__status {
+    display: none;
+  }
+
+  .win-feed__row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 0.9fr);
+    padding: 11px 14px;
+  }
+
+  .win-feed__player,
+  .win-feed__row span:nth-child(3) {
+    display: none;
+  }
+}

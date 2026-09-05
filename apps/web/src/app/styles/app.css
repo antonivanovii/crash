@@ -1,0 +1,167 @@
+/**
+ * Каркас приложения.
+ *
+ * Одно правило определяет всё остальное: скроллится только контент. Оболочка
+ * занимает ровно высоту экрана и не переполняется, топбар и сайдбар стоят
+ * на месте, а `overflow-y:auto` стоит на одной колонке.
+ */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.app-shell__body {
+  display: flex;
+  flex: 1;
+  min-height: 0; /* без этого flex-ребёнок не даст колонке скроллиться */
+}
+
+/* ── Сайдбар раздела ────────────────────────────────────────────────────── */
+
+/**
+ * Контейнер-слот. Наполняет его страница; пустой — схлопывается, поэтому
+ * маркетам не нужно ничего отключать.
+ */
+.app-shell__sidebar {
+  width: var(--kb-sidebar-width);
+  flex-shrink: 0;
+  overflow: hidden; /* внутренний скролл живёт на .kb-sidebar */
+}
+
+.app-shell__sidebar:empty {
+  display: none;
+}
+
+/* ── Контент ────────────────────────────────────────────────────────────── */
+.app-shell__content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  /* Горизонтального скролла у страницы нет: если что-то шире, виновата вёрстка. */
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+/* ── Правая колонка: купон, панель торговли ─────────────────────────────── */
+.app-shell__aside {
+  width: var(--kb-aside-width);
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-left: 1px solid var(--kb-hairline);
+  background: var(--kb-ink-850);
+}
+
+.app-shell__aside:empty {
+  display: none;
+}
+
+/* ── Баннер приостановки ────────────────────────────────────────────────── */
+.app-notice {
+  padding: var(--kb-space-3) var(--kb-space-6);
+  background: var(--kb-amber-tint);
+  color: var(--kb-amber-500);
+  font-size: 13px;
+  border-bottom: 1px solid var(--kb-hairline);
+  flex-shrink: 0;
+}
+
+/* ── Страница ───────────────────────────────────────────────────────────── */
+.page {
+  display: grid;
+  /* minmax(0,1fr), а не 1fr: колонка обязана уметь сжаться уже содержимого,
+     иначе широкая таблица растягивает всю страницу и ломает мобильный. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--kb-space-6);
+  align-content: start;
+  padding: var(--kb-page-padding);
+}
+
+/**
+ * Элемент грида по умолчанию не уже своего содержимого. Без этого правила
+ * длинная лента чипов или широкая таблица растягивают всю страницу, и на
+ * мобильном появляется горизонтальный скролл.
+ */
+.page > * {
+  min-width: 0;
+}
+
+.page__title {
+  font-family: var(--kb-font-ui);
+  font-size: 34px;
+  line-height: 38px;
+  font-weight: 700;
+  font-stretch: 108%;
+  letter-spacing: -0.02em;
+  color: var(--kb-text-hi);
+}
+
+.page__stub {
+  color: var(--kb-text-low);
+  max-width: 60ch;
+}
+
+/* Подложка под шторкой навигации. На десктопе не существует. */
+.app-shell__scrim {
+  display: none;
+}
+
+/* ── Планшет: сайдбар уезжает в шторку ──────────────────────────────────── */
+
+/**
+ * Ниже 1280 колонка навигации съедает больше четверти экрана. Прятать её
+ * в таббар нельзя — категорий больше пяти, — поэтому та же колонка становится
+ * шторкой. Второй копии навигации в DOM при этом не появляется.
+ */
+@media (max-width: 1279px) {
+  .app-shell__sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 55;
+    width: var(--kb-sidebar-width);
+    max-width: 86vw;
+    border-right: 1px solid var(--kb-hairline-strong);
+    box-shadow: 24px 0 64px rgb(0 0 0 / 60%);
+    transform: translateX(-100%);
+    transition: transform var(--kb-duration-sheet) var(--kb-ease);
+  }
+
+  .app-shell--nav-open .app-shell__sidebar {
+    transform: translateX(0);
+  }
+
+  .app-shell--nav-open .app-shell__scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: var(--kb-overlay);
+    backdrop-filter: blur(var(--kb-overlay-blur));
+    animation: kb-layer-in var(--kb-duration-layer) var(--kb-ease);
+  }
+
+  /* Правая колонка на планшете сужается, но остаётся: купон нужен рядом. */
+  .app-shell__aside {
+    width: 300px;
+  }
+}
+
+/* ── Мобильный ──────────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .page {
+    padding: 14px var(--kb-page-padding-mobile);
+  }
+
+  .page__title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  /* Правая колонка не помещается — её содержимое уезжает в шторку страницы. */
+  .app-shell__aside {
+    display: none;
+  }
+}

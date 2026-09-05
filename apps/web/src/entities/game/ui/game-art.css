@@ -1,0 +1,330 @@
+/**
+ * Арты игр. В макете каждый нарисован CSS-фигурами; сам макет помечает их
+ * временными («АРТ 640×640»), поэтому все они живут за одним компонентом —
+ * заменить на растр потом можно в одном месте.
+ *
+ * Общее для всех: квадрат с тёплым градиентом и фигура по центру.
+ */
+.game-art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: linear-gradient(168deg, #1e1a16 0%, #14100c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* У промо-игры фон теплее — карточка должна читаться первой. */
+.game-art--hot {
+  background: linear-gradient(168deg, #2a1505 0%, #14100c 100%);
+}
+
+/* ── Limbo: диагональ вверх и точка ─────────────────────────────────────── */
+.game-art--limbo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top right,
+    transparent 46%,
+    rgb(255 107 44 / 90%) 47% 50%,
+    transparent 51%
+  );
+}
+
+.game-art--limbo::after {
+  content: '';
+  position: absolute;
+  right: 26%;
+  top: 26%;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ember-500);
+}
+
+/* ── Dice: кубик с точками ──────────────────────────────────────────────── */
+.game-art__dice {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15%;
+  width: 40%;
+  aspect-ratio: 1 / 1;
+  padding: 16%;
+  border-radius: 10px;
+  background: var(--kb-text-hi);
+  transform: rotate(14deg);
+}
+
+.game-art__dice span {
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ink-900);
+}
+
+.game-art__dice span:nth-child(2),
+.game-art__dice span:nth-child(4),
+.game-art__dice span:nth-child(6),
+.game-art__dice span:nth-child(8) {
+  opacity: 0;
+}
+
+/* ── Mines: сетка с открытыми и миной ───────────────────────────────────── */
+.game-art__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+  width: 62%;
+  aspect-ratio: 1 / 1;
+}
+
+.game-art__grid span {
+  border-radius: 5px;
+  background: var(--kb-ink-600);
+}
+
+.game-art__grid span.is-safe {
+  background: rgb(63 216 164 / 20%);
+  border: 1px solid rgb(63 216 164 / 50%);
+}
+
+.game-art__grid span.is-mine {
+  background: var(--kb-rose-500);
+}
+
+/* ── Towers: убывающие ступени ──────────────────────────────────────────── */
+.game-art__towers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9%;
+  width: 62%;
+}
+
+.game-art__towers span {
+  height: 12px;
+  border-radius: 3px;
+  background: var(--kb-amber-500);
+}
+
+.game-art__towers span:nth-child(1) {
+  width: 100%;
+}
+.game-art__towers span:nth-child(2) {
+  width: 84%;
+  background: rgb(232 178 58 / 55%);
+}
+.game-art__towers span:nth-child(3) {
+  width: 68%;
+  background: rgb(232 178 58 / 32%);
+}
+.game-art__towers span:nth-child(4) {
+  width: 52%;
+  background: var(--kb-ink-600);
+}
+.game-art__towers span:nth-child(5) {
+  width: 36%;
+  background: var(--kb-ink-600);
+}
+
+/* ── Plinko: пины и множители ───────────────────────────────────────────── */
+.game-art__plinko {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11%;
+  width: 66%;
+}
+
+.game-art__plinko-row {
+  display: flex;
+  justify-content: center;
+  gap: 12%;
+  width: 100%;
+}
+
+.game-art__plinko-row span {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-text-low);
+}
+
+.game-art__plinko-slots {
+  display: flex;
+  gap: 4%;
+  width: 100%;
+  margin-top: 6%;
+}
+
+.game-art__plinko-slots span {
+  flex: 1;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.game-art__plinko-slots span:nth-child(1),
+.game-art__plinko-slots span:nth-child(5) {
+  background: var(--kb-rose-500);
+}
+.game-art__plinko-slots span:nth-child(2),
+.game-art__plinko-slots span:nth-child(4) {
+  background: var(--kb-amber-500);
+}
+.game-art__plinko-slots span:nth-child(3) {
+  background: var(--kb-ember-500);
+}
+
+/* ── Wheel: сектора и указатель ─────────────────────────────────────────── */
+.game-art__wheel {
+  position: relative;
+  width: 46%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--kb-radius-full);
+  background: conic-gradient(
+    var(--kb-ember-500) 0 25%,
+    var(--kb-ink-600) 25% 50%,
+    var(--kb-amber-500) 50% 62%,
+    var(--kb-ink-600) 62% 78%,
+    var(--kb-mint-500) 78% 100%
+  );
+}
+
+.game-art__wheel::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  width: 10px;
+  height: 12px;
+  margin-left: -5px;
+  background: var(--kb-text-hi);
+  clip-path: polygon(50% 100%, 100% 0, 0 0);
+}
+
+/* ── Crash: траектория со свечением ─────────────────────────────────────── */
+.game-art--crash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top right, rgb(63 216 164 / 18%) 0%, transparent 62%);
+}
+
+.game-art__trail {
+  position: absolute;
+  left: 10%;
+  bottom: 16%;
+  width: 74%;
+  height: 2px;
+  background: var(--kb-mint-500);
+  transform: rotate(-32deg);
+  transform-origin: left center;
+}
+
+/* ── Keno: сетка выпавших ───────────────────────────────────────────────── */
+.game-art__keno {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6%;
+  width: 60%;
+  aspect-ratio: 1 / 1;
+}
+
+.game-art__keno span {
+  border-radius: 3px;
+  background: var(--kb-ink-600);
+}
+
+.game-art__keno span.is-hit {
+  background: var(--kb-ember-500);
+}
+
+/* ── Roulette: кольцо и центр ───────────────────────────────────────────── */
+.game-art__roulette {
+  width: 44%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--kb-radius-full);
+  border: 8px solid var(--kb-ink-600);
+  border-top-color: var(--kb-rose-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-art__roulette::after {
+  content: '';
+  width: 34%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-amber-500);
+}
+
+/* ── Dragon Tiger: две карты ────────────────────────────────────────────── */
+.game-art__cards {
+  display: flex;
+  gap: 6%;
+}
+
+.game-art__cards span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 48px;
+  border-radius: 5px;
+  background: var(--kb-text-hi);
+}
+
+.game-art__cards span:first-child {
+  transform: rotate(-8deg);
+}
+
+.game-art__cards span:last-child {
+  transform: rotate(8deg);
+}
+
+.game-art__cards span:first-child::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: var(--kb-rose-500);
+  transform: rotate(45deg);
+}
+
+.game-art__cards span:last-child::after {
+  content: '';
+  width: 13px;
+  height: 12px;
+  background: var(--kb-amber-500);
+  clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
+}
+
+/* ── Sic Bo: рамка с кубиками ───────────────────────────────────────────── */
+.game-art__sicbo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  width: 34%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--kb-radius-m);
+  border: 2px solid var(--kb-ink-500);
+  background: rgb(110 134 255 / 10%);
+}
+
+.game-art__sicbo span {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--kb-text-hi);
+}
+
+/* ── Плейсхолдер: игра ещё не готова ────────────────────────────────────── */
+.game-art--placeholder {
+  background: repeating-linear-gradient(135deg, #1e1a16 0 8px, #17130f 8px 16px);
+  font-family: var(--kb-font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--kb-text-disabled);
+}

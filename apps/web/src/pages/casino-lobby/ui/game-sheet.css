@@ -1,0 +1,77 @@
+.game-sheet__head {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+  margin-bottom: var(--kb-space-4);
+}
+
+.game-sheet__art {
+  width: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.game-sheet__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.game-sheet__meta {
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+.game-sheet__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--kb-space-2);
+  margin-bottom: var(--kb-space-3);
+}
+
+.game-sheet__stat {
+  display: grid;
+  gap: 3px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  background: var(--kb-ink-800);
+}
+
+.game-sheet__fairness {
+  display: flex;
+  gap: 10px;
+  padding: 12px 13px;
+  margin-bottom: var(--kb-space-3);
+  border-radius: 10px;
+  background: var(--kb-mint-tint-soft);
+  border: 1px solid var(--kb-mint-line);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--kb-text-mid);
+}
+
+.game-sheet__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgb(63 216 164 / 18%);
+  color: var(--kb-mint-500);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.game-sheet__plays {
+  margin-bottom: var(--kb-space-4);
+}
+
+.game-sheet__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.game-sheet__play {
+  flex: 1;
+}

@@ -1,0 +1,385 @@
+/**
+ * Слои над контентом. Макет: UI Kit → «Тосты и тултип», «Слои».
+ * Оверлей ink/900 78% + blur 8. Тост w 380 · r 12 · e/1.
+ *
+ * Тень появляется только здесь: в потоке карточки обходятся границей.
+ */
+
+/* ── Тост ───────────────────────────────────────────────────────────────── */
+.kb-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--kb-space-3);
+  width: 380px;
+  max-width: 100%;
+  padding: 14px 16px;
+  background: var(--kb-ink-700);
+  border: 1px solid var(--kb-hairline-strong);
+  border-radius: var(--kb-radius-m);
+  box-shadow: var(--kb-elevation-1);
+  animation: kb-layer-in var(--kb-duration-layer) var(--kb-ease);
+}
+
+.kb-toast--price {
+  border-color: rgb(255 107 44 / 40%);
+}
+
+.kb-toast--success {
+  border-color: rgb(63 216 164 / 35%);
+}
+
+.kb-toast--error {
+  border-color: rgb(244 88 91 / 35%);
+}
+
+.kb-toast__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--kb-ink-600);
+  color: var(--kb-text-mid);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.kb-toast--price .kb-toast__icon {
+  background: var(--kb-ember-tint-strong);
+  color: var(--kb-ember-400);
+  font-family: var(--kb-font-mono);
+}
+
+.kb-toast--success .kb-toast__icon {
+  background: rgb(63 216 164 / 18%);
+  color: var(--kb-mint-500);
+}
+
+.kb-toast--error .kb-toast__icon {
+  background: rgb(244 88 91 / 18%);
+  color: var(--kb-rose-500);
+}
+
+.kb-toast__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.kb-toast__title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.kb-toast__note {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--kb-text-mid);
+}
+
+.kb-toast__close {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--kb-text-low);
+  cursor: pointer;
+  transition: color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-toast__close:hover {
+  color: var(--kb-text-hi);
+}
+
+.kb-toast-stack {
+  position: fixed;
+  right: var(--kb-space-6);
+  bottom: var(--kb-space-6);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-space-3);
+}
+
+/* ── Тултип ─────────────────────────────────────────────────────────────── */
+.kb-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.kb-tooltip__bubble {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 260px;
+  padding: 9px 12px;
+  background: var(--kb-ink-500);
+  border-radius: var(--kb-radius-s);
+  box-shadow: var(--kb-elevation-1);
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--kb-text-hi);
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--kb-duration-hover) var(--kb-ease);
+  z-index: 40;
+}
+
+.kb-tooltip__bubble::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 10px;
+  height: 10px;
+  background: var(--kb-ink-500);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.kb-tooltip:hover .kb-tooltip__bubble,
+.kb-tooltip:focus-within .kb-tooltip__bubble {
+  opacity: 1;
+}
+
+/* ── Оверлей ────────────────────────────────────────────────────────────── */
+.kb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--kb-space-6);
+  background: var(--kb-overlay);
+  backdrop-filter: blur(var(--kb-overlay-blur));
+  animation: kb-layer-in var(--kb-duration-layer) var(--kb-ease);
+}
+
+/**
+ * В макете подложка сделана через opacity и blur на самом контенте. Так не
+ * получится без обёртки всего приложения, поэтому здесь честный scrim с тем же
+ * восприятием — и, в отличие от макета, он ловит клик мимо шторки.
+ */
+.kb-overlay--bottom {
+  align-items: flex-end;
+  padding: 0;
+}
+
+.kb-overlay--left {
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+/* ── Модалка ────────────────────────────────────────────────────────────── */
+.kb-modal {
+  width: 100%;
+  max-width: 460px;
+  background: var(--kb-ink-700);
+  border: 1px solid var(--kb-hairline-strong);
+  border-radius: var(--kb-radius-l);
+  box-shadow: 0 24px 64px rgb(0 0 0 / 60%);
+  overflow: hidden;
+}
+
+/* Необратимое действие обводится целиком: рамка видна раньше, чем текст прочитан. */
+.kb-modal--danger {
+  border-color: rgb(244 88 91 / 40%);
+}
+
+.kb-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 22px 0 22px;
+}
+
+.kb-modal__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--kb-text-hi);
+  margin-bottom: 4px;
+}
+
+.kb-modal__subtitle {
+  font-size: 13px;
+  color: var(--kb-text-mid);
+}
+
+.kb-modal__close {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--kb-text-low);
+  cursor: pointer;
+  transition: color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-modal__close:hover {
+  color: var(--kb-text-hi);
+}
+
+.kb-modal__body {
+  padding: 18px 22px;
+}
+
+.kb-modal__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.kb-modal__actions > * {
+  flex: 1;
+}
+
+/* ── Шторка снизу ───────────────────────────────────────────────────────── */
+
+/**
+ * Верхняя кромка — единственный акцент шторки, и он одинаков во всех макетах:
+ * одиночный хайрлайн на ступень ярче обычных (0.14 против 0.09 у карточек)
+ * плюс тень, направленная ВВЕРХ. Никакого градиента и свечения — тень просто
+ * отрывает шторку от подложки, за счёт чего светлая линия читается как
+ * подсвеченная.
+ *
+ * Боковых и нижней границ нет намеренно: шторка приклеена к краям экрана.
+ */
+.kb-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 55;
+  background: var(--kb-ink-700);
+  border-top: 1px solid var(--kb-hairline-strong);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -24px 64px rgb(0 0 0 / 60%);
+  animation: kb-sheet-in var(--kb-duration-sheet) var(--kb-ease);
+  /* Возврат после недотянутого жеста: палец отпустили — шторка встаёт на место. */
+  transition: transform var(--kb-duration-hover) var(--kb-ease);
+  /* На iOS домашняя полоса перекрывает нижние кнопки. */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-sheet--closing {
+  animation: kb-sheet-out var(--kb-duration-sheet) var(--kb-ease) forwards;
+}
+
+.kb-overlay--closing {
+  animation: kb-layer-out var(--kb-duration-sheet) var(--kb-ease) forwards;
+  pointer-events: none;
+}
+
+/* Акцентная кромка: раздел честности и подтверждения, меняющие деньги. */
+.kb-sheet--amber {
+  border-top-color: rgb(232 178 58 / 40%);
+}
+
+.kb-sheet--danger {
+  border-top-color: rgb(244 88 91 / 40%);
+}
+
+/**
+ * Выступ — не украшение, а орган управления: за него шторку тянут вниз.
+ * Поэтому у него своя зона нажатия во всю ширину и курсор-хват.
+ */
+.kb-sheet__grabber {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 14px 0;
+  flex-shrink: 0;
+  cursor: grab;
+  touch-action: none;
+}
+
+.kb-sheet__grabber:active {
+  cursor: grabbing;
+}
+
+.kb-sheet__grabber:focus-visible::before {
+  background: var(--kb-ember-500);
+}
+
+.kb-sheet__grabber::before {
+  content: '';
+  width: 36px;
+  height: 4px;
+  border-radius: var(--kb-radius-full);
+  background: var(--kb-ink-500);
+}
+
+.kb-sheet__body {
+  padding: 0 16px 18px 16px;
+  overflow-y: auto;
+}
+
+.kb-sheet__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--kb-text-hi);
+  margin-bottom: var(--kb-space-3);
+}
+
+
+/* ── Дропдаун ───────────────────────────────────────────────────────────── */
+.kb-dropdown {
+  width: 240px;
+  background: var(--kb-ink-700);
+  border: 1px solid var(--kb-hairline-strong);
+  border-radius: var(--kb-radius-m);
+  box-shadow: var(--kb-elevation-1);
+  overflow: hidden;
+  animation: kb-layer-in var(--kb-duration-layer) var(--kb-ease);
+}
+
+.kb-dropdown__head {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--kb-hairline-soft);
+  font-family: var(--kb-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+.kb-dropdown__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 11px 14px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--kb-text-mid);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-dropdown__item--active:not(:disabled),
+.kb-dropdown__item:hover:not(:disabled) {
+  background: rgb(255 246 235 / 4%);
+  color: var(--kb-text-hi);
+}
+
+.kb-dropdown__item[aria-selected='true'] {
+  background: rgb(255 107 44 / 10%);
+  color: var(--kb-ember-400);
+}
+
+.kb-dropdown__item:disabled {
+  color: var(--kb-text-disabled);
+  cursor: not-allowed;
+}

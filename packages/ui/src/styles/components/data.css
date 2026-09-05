@@ -1,0 +1,447 @@
+/**
+ * Блоки данных. Макет: UI Kit → «Блоки данных».
+ * Строка выписки h 60 · кнопка коэффициента h 52 · шапка баланса h 44.
+ */
+
+/* ── Карточка ───────────────────────────────────────────────────────────── */
+.kb-card {
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: var(--kb-radius-m);
+  padding: var(--kb-space-4);
+}
+
+.kb-card--nested {
+  background: var(--kb-ink-700);
+}
+
+.kb-card--flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Свечение — только у живого раунда. Больше нигде в системе. */
+.kb-card--live {
+  border-color: rgb(255 107 44 / 50%);
+  box-shadow: var(--kb-elevation-live);
+}
+
+.kb-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--kb-hairline);
+}
+
+.kb-card__body {
+  padding: var(--kb-space-6);
+}
+
+/* ── Выписка ────────────────────────────────────────────────────────────── */
+.kb-ledger {
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+  background: var(--kb-ink-800);
+  overflow: hidden;
+}
+
+.kb-ledger__head,
+.kb-ledger__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 0.7fr;
+  align-items: center;
+}
+
+.kb-ledger__head {
+  padding: 10px 16px;
+  background: var(--kb-ink-850);
+  font-family: var(--kb-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+.kb-ledger__row {
+  padding: 14px 16px;
+  border-top: 1px solid var(--kb-hairline-soft);
+}
+
+/**
+ * Чередование строк: глаз не теряет строку на длинной выписке.
+ *
+ * Первый ребёнок контейнера — шапка, поэтому подсвечивается нечётный:
+ * вторая строка данных, как в макете.
+ */
+.kb-ledger__row:nth-child(odd) {
+  background: var(--kb-ink-750);
+}
+
+.kb-ledger__title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.kb-ledger__meta {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+.kb-ledger__amount {
+  text-align: right;
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.kb-ledger__amount--in {
+  color: var(--kb-mint-500);
+}
+
+.kb-ledger__amount--out {
+  color: var(--kb-rose-500);
+}
+
+.kb-ledger__balance {
+  text-align: right;
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--kb-text-mid);
+}
+
+/* Ссылка на источник: раунд, ставка, сделка. Это то, что предъявляют при споре. */
+.kb-ledger__source {
+  text-align: right;
+  font-family: var(--kb-font-mono);
+  font-size: 11px;
+  color: var(--kb-ember-500);
+}
+
+/* ── Кнопка котировки ───────────────────────────────────────────────────── */
+
+/**
+ * Коэффициент в спорте и «Да/Нет» в маркетах — одна кнопка. Структура общая:
+ * подпись, моноширинное значение, рамка по состоянию.
+ */
+.kb-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 var(--kb-space-2);
+  background: var(--kb-ink-700);
+  border: 1px solid var(--kb-hairline);
+  border-radius: var(--kb-radius-s);
+  cursor: pointer;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    border-color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-quote--l {
+  height: var(--kb-quote-height);
+}
+
+.kb-quote--m {
+  height: var(--kb-control-xl);
+}
+
+.kb-quote--s {
+  height: 40px;
+}
+
+.kb-quote:hover:not(:disabled) {
+  background: var(--kb-ink-600);
+  border-color: var(--kb-hairline-strong);
+}
+
+.kb-quote__label {
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--kb-text-low);
+}
+
+.kb-quote__value {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--kb-text-hi);
+}
+
+.kb-quote--s .kb-quote__value {
+  font-size: 13px;
+}
+
+.kb-quote--selected {
+  background: var(--kb-ember-tint);
+  border-color: var(--kb-ember-500);
+}
+
+.kb-quote--selected .kb-quote__label,
+.kb-quote--selected .kb-quote__value {
+  color: var(--kb-ember-400);
+}
+
+/* Рост цены: игрок должен видеть, что коэффициент стал лучше. */
+.kb-quote--up {
+  border-color: rgb(63 216 164 / 50%);
+}
+
+.kb-quote--up .kb-quote__value {
+  color: var(--kb-mint-500);
+}
+
+/* Падение показывается со старым значением: «стало хуже, и вот насколько». */
+.kb-quote--down {
+  border-color: rgb(244 88 91 / 45%);
+}
+
+.kb-quote--down .kb-quote__value {
+  color: var(--kb-rose-500);
+}
+
+.kb-quote__previous {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--kb-rose-500);
+}
+
+/* Стороны рынка предсказаний. */
+.kb-quote--yes {
+  background: var(--kb-mint-tint);
+  border-color: rgb(63 216 164 / 35%);
+}
+
+.kb-quote--yes .kb-quote__label,
+.kb-quote--yes .kb-quote__value {
+  color: var(--kb-mint-500);
+}
+
+.kb-quote--no {
+  background: rgb(244 88 91 / 10%);
+  border-color: rgb(244 88 91 / 30%);
+}
+
+.kb-quote--no .kb-quote__label,
+.kb-quote--no .kb-quote__value {
+  color: var(--kb-rose-500);
+}
+
+/**
+ * Приостановлено и «линии нет» — разные вещи, и выглядят по-разному.
+ * Замок означает «вернём», прочерк — «этого рынка не будет».
+ */
+.kb-quote--suspended,
+.kb-quote--empty,
+.kb-quote:disabled {
+  background: var(--kb-ink-800);
+  border-color: var(--kb-hairline-soft);
+  cursor: not-allowed;
+}
+
+.kb-quote--suspended .kb-quote__label,
+.kb-quote--empty .kb-quote__label,
+.kb-quote:disabled .kb-quote__label,
+.kb-quote--empty .kb-quote__value,
+.kb-quote:disabled .kb-quote__value {
+  color: var(--kb-text-disabled);
+}
+
+.kb-quote__lock {
+  font-size: 12px;
+  line-height: 1.1;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+/* ── Шапка баланса ──────────────────────────────────────────────────────── */
+.kb-balance {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 14px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+}
+
+.kb-balance__label {
+  font-family: var(--kb-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+}
+
+.kb-balance__value {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--kb-text-hi);
+}
+
+.kb-balance__action {
+  margin-left: auto;
+}
+
+/* Разбивка: свободно и в эскроу. Игрок должен понимать, почему свободный
+   баланс меньше суммы, которую он держит в системе. */
+.kb-balance-split {
+  padding: 12px 14px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+}
+
+.kb-balance-split__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--kb-text-mid);
+}
+
+.kb-balance-split__row + .kb-balance-split__row {
+  margin-top: 7px;
+}
+
+.kb-balance-split__value {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--kb-text-hi);
+}
+
+.kb-balance-split__value--escrow {
+  color: var(--kb-amber-500);
+}
+
+/* ── Поле хэша ──────────────────────────────────────────────────────────── */
+.kb-hash {
+  padding: 12px 14px;
+  background: var(--kb-ink-800);
+  border: 1px solid var(--kb-hairline);
+  border-radius: 10px;
+}
+
+.kb-hash__label {
+  font-family: var(--kb-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kb-text-low);
+  margin-bottom: 6px;
+}
+
+.kb-hash__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kb-hash__value {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--kb-font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--kb-text-hi);
+  word-break: break-all;
+}
+
+.kb-hash__copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--kb-ink-600);
+  border: none;
+  border-radius: var(--kb-radius-s);
+  color: var(--kb-text-mid);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background var(--kb-duration-hover) var(--kb-ease),
+    color var(--kb-duration-hover) var(--kb-ease);
+}
+
+.kb-hash__copy:hover {
+  background: var(--kb-ink-500);
+  color: var(--kb-text-hi);
+}
+
+/* ── Пользователь ───────────────────────────────────────────────────────── */
+.kb-user {
+  display: flex;
+  align-items: center;
+  gap: var(--kb-space-3);
+}
+
+.kb-user__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kb-text-hi);
+}
+
+.kb-user__meta {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--kb-text-low);
+}
+
+.kb-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--kb-radius-m);
+  background: rgb(255 107 44 / 16%);
+  border: 1px solid var(--kb-ember-line);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ── Деньги ─────────────────────────────────────────────────────────────── */
+.kb-money {
+  font-family: var(--kb-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--kb-text-hi);
+}
+
+.kb-money--large {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.kb-money--win {
+  color: var(--kb-mint-500);
+}
+
+.kb-money--loss {
+  color: var(--kb-rose-500);
+}
+
+.kb-money--escrow {
+  color: var(--kb-amber-500);
+}
+
+.kb-money--muted {
+  color: var(--kb-text-low);
+}
